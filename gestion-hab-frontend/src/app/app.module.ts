@@ -10,7 +10,7 @@ import {
   NbStepperModule,
   NbSidebarModule,
   NbCardModule,
-  NbMenuModule, NbOptionModule, NbSelectModule, NbListModule, NbIconModule, NbButtonModule
+  NbMenuModule, NbOptionModule, NbSelectModule, NbListModule, NbIconModule, NbButtonModule, NbTabsetModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LayoutPageComponent } from './layout-page/layout-page.component';
@@ -22,6 +22,7 @@ import { ApprouverDemandeComponent } from './approuver-demande/approuver-demande
 import { HistoriqueDemandeComponent } from './historique-demande/historique-demande.component';
 import { HistoriqueMajComponent } from './historique-maj/historique-maj.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AttachFileComponent } from './attach-file/attach-file.component';
 
 const appRoutes: Routes = [
   { path: '', component: DashboardComponent },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   { path: 'approuver', component: ApprouverDemandeComponent },
   { path: 'historique-demande', component: HistoriqueDemandeComponent },
   { path: 'historique-maj', component: HistoriqueMajComponent },
+  { path: 'attach-file', component: AttachFileComponent },
 ];
 
 @NgModule({
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     ApprouverDemandeComponent,
     HistoriqueDemandeComponent,
     HistoriqueMajComponent,
-    DashboardComponent
+    DashboardComponent,
+    AttachFileComponent
   ],
   imports: [
     BrowserModule,
@@ -60,8 +63,10 @@ const appRoutes: Routes = [
     NbIconModule,
     NbButtonModule,
     BrowserModule,
-    RouterModule.forRoot( appRoutes,
-      { enableTracing: true } )
+    RouterModule.forRoot(appRoutes,
+      {enableTracing: true}),
+    NbTabsetModule,
+    NbStepperModule
 
   ],
   providers: [],
