@@ -10,7 +10,7 @@ import {
   NbStepperModule,
   NbSidebarModule,
   NbCardModule,
-  NbMenuModule, NbOptionModule, NbSelectModule, NbListModule, NbIconModule, NbButtonModule, NbTabsetModule
+  NbMenuModule, NbOptionModule, NbSelectModule, NbListModule, NbIconModule, NbButtonModule, NbTabsetModule, NbUserModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LayoutPageComponent } from './layout-page/layout-page.component';
@@ -66,7 +66,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes,
       {enableTracing: true}),
     NbTabsetModule,
-    NbStepperModule
+    NbStepperModule,
+    NbUserModule
 
   ],
   providers: [],
