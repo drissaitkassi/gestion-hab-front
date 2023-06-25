@@ -18,6 +18,7 @@ export class SideMenuComponent implements OnInit {
     {
       title: 'Tableau de  Bord',
       icon: 'activity-outline',
+      url:'/'
 
     },
     {
@@ -28,18 +29,22 @@ export class SideMenuComponent implements OnInit {
     {
       title: 'Demandes à Approuver',
       icon: 'checkmark-circle-2-outline',
+      url:'approuver'
     },
     {
       title: 'Demandes à Valider',
       icon: { icon: 'checkmark-outline', pack: 'eva' },
+      url:'valider'
     },
     {
       title: 'Historique des Demandes',
       icon: 'clock-outline',
+      url:'historique-demande'
     },
     {
       title: 'Historique Mise a jours',
       icon: 'flip-outline',
+      url:'historique-maj'
     }
 
   ];
