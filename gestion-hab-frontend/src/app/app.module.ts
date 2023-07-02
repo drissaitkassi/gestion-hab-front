@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,12 +23,29 @@ import { HistoriqueDemandeComponent } from './historique-demande/historique-dema
 import { HistoriqueMajComponent } from './historique-maj/historique-maj.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AttachFileComponent } from './attach-file/attach-file.component';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {AuthGuard} from "./gurads/auth.guard";
+
+export function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8080/auth',
+        realm: 'gest-hab',
+        clientId: 'gestion-hab',
+      },
+      initOptions: {
+        onLoad: 'login-required',
+
+      },
+    });
+}
 
 const appRoutes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'initier-demande', component: InitDemandeComponent },
-  { path: 'valider', component: ValiderDemandeComponent },
-  { path: 'approuver', component: ApprouverDemandeComponent },
+  { path: 'valider', component: ValiderDemandeComponent,canActivate:[AuthGuard],data:{roles:['INITIATEUR','VALIDATEUR']} },
+  { path: 'approuver', component: ApprouverDemandeComponent,canActivate:[AuthGuard],data:{roles:['INITIATEUR','APPROBATEUR']} },
   { path: 'historique-demande', component: HistoriqueDemandeComponent },
   { path: 'historique-maj', component: HistoriqueMajComponent },
   { path: 'attach-file', component: AttachFileComponent },
@@ -63,6 +80,7 @@ const appRoutes: Routes = [
     NbIconModule,
     NbButtonModule,
     BrowserModule,
+    KeycloakAngularModule,
     RouterModule.forRoot(appRoutes,
       {enableTracing: true}),
     NbTabsetModule,
@@ -70,7 +88,12 @@ const appRoutes: Routes = [
     NbUserModule
 
   ],
-  providers: [],
+  providers: [    {
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService],
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
