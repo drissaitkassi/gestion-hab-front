@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NbMenuItem} from "@nebular/theme";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-layout-page',
@@ -7,11 +8,15 @@ import {NbMenuItem} from "@nebular/theme";
   styleUrls: ['./layout-page.component.scss']
 })
 export class LayoutPageComponent implements OnInit {
-  constructor() {
+  constructor(public keycloak:KeycloakService) {
   }
 
 
   ngOnInit(): void {
+  }
+
+  handleLogout() {
+
   }
 }
 
